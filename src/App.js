@@ -1,36 +1,35 @@
-import React, { useEffect, useStatet} from 'react'
-import PearCard from './PearCard'
-import PearPage from './PearPage'
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import PearCard from './Commponent/PearCard/PearCard';
+import PearPage from './Commponent/PearPage/PearPage';
+import data from './data.json';  
 import './App.css';
-import axios from 'axios';
 
 const App = () => {
-  const [developers, setDevelopers] = useStatet ([]);
-  useEffect(()) => {
-    axios.get ('/data.json')
-    .then (response => setDevelopers(response.data))
-    .catch(error => console.error ("We have a trouble", error));
-  }[]
+  const [developers, setDevelopers] = useState([]);
+
+  useEffect(() => {
+    setDevelopers(data);  
+  }, []);
 
   return (
     <Router>
       <div className='App'>
-        <Switch>
-          <Route exact path="/">
+        <Routes>
+          <Route exact path="/" element={
             <div className='card-container'>
-              {developers.map(dev =>(
-                <link to {'/developer/${dev.id}'} key = {dev.id}>
+              {developers.map(dev => (
+                <Link to={`/developer/${dev.id}`} key={dev.id}>
                   <PearCard developer={dev} />
-                </link>
+                </Link>
               ))}
             </div>
-          </Route>
-          <Route path ="/developer/:id" Component={PearPage}/>
-        </Switch>
+          }/>
+          <Route path="/developer/:id" element={<PearPage />} />
+        </Routes>
       </div>
     </Router>
-  )
+  );
 }
 
 export default App;
