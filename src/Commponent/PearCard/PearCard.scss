@@ -1,0 +1,26 @@
+.pear-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px;
+    text-align: center;
+    width: 200px;
+    transition: transform 0.2s;
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  
+    .pear-image {
+      width: 100%;
+      height: auto;
+      border-radius: 50%;
+    }
+  
+    h2 {
+      margin-top: 8px;
+      font-size: 1.5em;
+      color: #333;
+    }
+  }
+  
