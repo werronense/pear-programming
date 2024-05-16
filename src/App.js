@@ -4,6 +4,7 @@ import PearPage from './components/PearPage/PearPage';
 import MainPage from './components/MainPage/MainPage';
 import data from './data.json';  
 import './App.scss';
+import axios from 'axios';
 
 const App = () => {
   const [developers, setDevelopers] = useState([]);
