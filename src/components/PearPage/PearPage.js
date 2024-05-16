@@ -19,8 +19,8 @@ const PearPage = () => {
   return (
     <div className="pear-page">
       <h1>{developer.name}</h1>
-      <img src={developer.image} alt={developer.name} className="pear-image" />
-      <p>{developer.story}</p>
+      <img src={developer.imageUrl} alt={developer.name} className="pear-image" />
+      <p>{developer.paragraph}</p>
     </div>
   );
 };
