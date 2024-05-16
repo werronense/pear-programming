@@ -1,26 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import data from '../../data.json';  
+// import data from '../../data.json';  
 import './PearPage.scss';
+import axios from 'axios';
 
 const PearPage = () => {
-  const { id } = useParams();
-  const [developer, setDeveloper] = useState(null);
+  const { name } = useParams();
+  const [pear , setPear] = useState(null);
+  const pear1 = pear[0]
 
   useEffect(() => {
-    const dev = data.find(d => d.id === parseInt(id));
-    setDeveloper(dev);
-  }, [id]);
+    axios.get(`http://localhost:5050/pears/${name}`)
+    .then(response => {
+      setPear(response.data);
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+   
+  }, [name]);
 
-  if (!developer) {
+  if (!pear) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className="pear-page">
-      <h1>{developer.name}</h1>
-      <img src={developer.image} alt={developer.name} className="pear-image" />
-      <p>{developer.story}</p>
+      <h1>{pear1.name}</h1>
+      <img src={pear1.imageURL} alt={pear1.name} className="pear-image" />
+      <p>{pear1.paragraph}</p>
     </div>
   );
 };
