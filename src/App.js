@@ -1,25 +1,36 @@
-import logo from './logo.svg';
+import React, { useEffect, useStatet} from 'react'
+import PearCard from './PearCard'
+import PearPage from './PearPage'
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import './App.css';
+import axios from 'axios';
 
-function App() {
+const App = () => {
+  const [developers, setDevelopers] = useStatet ([]);
+  useEffect(()) => {
+    axios.get ('/data.json')
+    .then (response => setDevelopers(response.data))
+    .catch(error => console.error ("We have a trouble", error));
+  }[]
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <div className='App'>
+        <Switch>
+          <Route exact path="/">
+            <div className='card-container'>
+              {developers.map(dev =>(
+                <link to {'/developer/${dev.id}'} key = {dev.id}>
+                  <PearCard developer={dev} />
+                </link>
+              ))}
+            </div>
+          </Route>
+          <Route path ="/developer/:id" Component={PearPage}/>
+        </Switch>
+      </div>
+    </Router>
+  )
 }
 
 export default App;
