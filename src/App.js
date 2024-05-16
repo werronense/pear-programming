@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import PearPage from './components/PearPage/PearPage';
 import MainPage from './components/MainPage/MainPage';
+import RandomPage from './components/RandomPage/RandomPage';
 import data from './data.json';  
 import './App.scss';
 
@@ -17,7 +18,8 @@ const App = () => {
       <div className='App'>
         <Routes>
           <Route exact path="/" element={<MainPage developers={developers} />}/>
-          <Route path="/developer/:id" element={<PearPage />} />
+          <Route path="/pears/:id" element={<PearPage />} />
+          <Route path="/pears/random" element={<RandomPage />} />
         </Routes>
       </div>
     </Router>
