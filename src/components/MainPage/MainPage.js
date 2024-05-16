@@ -1,8 +1,16 @@
 import './MainPage.scss';
 import PearCard from '../PearCard/PearCard';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function MainPage({ developers }) {
+    const navigate = useNavigate();
+
+    const handleRandomButtonClick = (event) => {
+        console.log(event.target.value);
+        console.log('Navigating to homepage...');
+        navigate("/pears/random");
+    }
+
     return (
         <div className="main-page">
             <div className="content">
@@ -13,10 +21,13 @@ function MainPage({ developers }) {
                 <div className="card-container">
                     {/* //pear cards go here... */}
                     {developers.map((dev) => (
-                        <Link to={`/developer/${dev.id}`} key={dev.id}>
+                        <Link to={`/pears/${dev.id}`} key={dev.id}>
                             <PearCard developer={dev} />
                         </Link>
                     ))}
+                </div>
+                <div className="random">
+                    <button className='random__button' onClick={handleRandomButtonClick}>Random Pear</button>
                 </div>
             </div>
         </div>

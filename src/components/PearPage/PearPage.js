@@ -18,7 +18,7 @@ const PearPage = () => {
 
   if (!developer) {
     return <div>Loading...</div>;
-  }
+  } 
 
   return (
     <div className="pear-page">
