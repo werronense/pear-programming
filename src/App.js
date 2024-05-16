@@ -10,7 +10,9 @@ const App = () => {
   const [developers, setDevelopers] = useState([]);
 
   useEffect(() => {
-    setDevelopers(data);  
+    axios.get('http://localhost:5050/pears')
+      .then(response => setDevelopers(response.data))
+      .catch(error => console.error("We have a trouble", error));
   }, []);
 
   return (

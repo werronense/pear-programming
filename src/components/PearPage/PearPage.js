@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import data from '../../data.json';  
+import axios from 'axios';
 import './PearPage.scss';
 
 const PearPage = () => {
@@ -8,8 +8,12 @@ const PearPage = () => {
   const [developer, setDeveloper] = useState(null);
 
   useEffect(() => {
-    const dev = data.find(d => d.id === parseInt(id));
-    setDeveloper(dev);
+    axios.get(`http://localhost:5050/pears`)
+      .then(response => {
+        const dev = response.data.find(d => d.id === id);
+        setDeveloper(dev);
+      })
+      .catch(error => console.error("We have a trouble", error));
   }, [id]);
 
   if (!developer) {
