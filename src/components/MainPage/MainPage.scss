@@ -1,0 +1,24 @@
+@import "../../App.scss";
+
+.main-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: monospace;
+
+    .content {
+        margin: 2.5rem;
+        padding: 2.5rem;
+        border: 1px solid darkgreen;
+        border-radius: 5px;
+        box-shadow: 5px 5px 5px green;
+
+        .content__title {
+            margin: 1rem;
+        }
+
+        .content__subtitle {
+            margin: 1rem;
+        }
+    }
+}
