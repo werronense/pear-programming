@@ -1,24 +1,34 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import PearCard from './Commponent/PearCard/PearCard';
+import PearPage from './Commponent/PearPage/PearPage';
+import data from './data.json';  
 import './App.css';
 
-function App() {
+const App = () => {
+  const [developers, setDevelopers] = useState([]);
+
+  useEffect(() => {
+    setDevelopers(data);  
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className='App'>
+        <Routes>
+          <Route exact path="/" element={
+            <div className='card-container'>
+              {developers.map(dev => (
+                <Link to={`/developer/${dev.id}`} key={dev.id}>
+                  <PearCard developer={dev} />
+                </Link>
+              ))}
+            </div>
+          }/>
+          <Route path="/developer/:id" element={<PearPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
