@@ -7,7 +7,7 @@ import axios from 'axios';
 const PearPage = () => {
   const { name } = useParams();
   const [pear , setPear] = useState(null);
-  const pear1 = pear[0]
+  
 
   useEffect(() => {
     axios.get(`http://localhost:5050/pears/${name}`)
@@ -25,11 +25,15 @@ const PearPage = () => {
     return <div>Loading...</div>;
   }
 
+  const randomPear = pear[Math.floor(Math.random() * pear.length)];
+
   return (
     <div className="pear-page">
-      <h1>{pear1.name}</h1>
-      <img src={pear1.imageURL} alt={pear1.name} className="pear-image" />
-      <p>{pear1.paragraph}</p>
+      <div key={randomPear.id}>
+        <h1>{randomPear.name}</h1>
+        <img src={randomPear.imageURL} alt={randomPear.name} className="pear-image" />
+        <p>{randomPear.paragraph}</p>
+      </div>
     </div>
   );
 };
